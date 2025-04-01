@@ -1,0 +1,25 @@
+# Boundary Conditions
+[boundary_conditions]
+minus_x = { ID = 1, type = 1, value = 0.0 }
+plus_x  = { ID = 2, type = 1, value = 1.0 }
+minus_y = { ID = 3, type = 1, value = 0.0 }
+plus_y  = { ID = 4, type = 1, value = 0.0 }
+minus_z = { ID = 5, type = 1, value = 0.0 }
+plus_z  = { ID = 6, type = 1, value = 0.0 }
+interior = { ID = 7, type = 3, value = 0.0 }
+undetermined = { ID = -1, type = 1, value = 0.0 }
+
+# Source terms, Source = Source_p*concentration + Source_u
+[sources]
+Source_u = 0.0
+Source_p = 0.0
+
+# Initial and simulation parameters
+[parameters]
+ICvalue = 1.0
+deltat = 10.0
+"Diffusion coefficient" = 1.0
+Density = 1000.0
+
+# Velocity vector
+velocity = [0.0, 0.0, 0.0]
