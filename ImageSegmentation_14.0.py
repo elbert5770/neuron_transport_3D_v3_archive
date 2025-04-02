@@ -7,7 +7,7 @@
 # The simulation number is the number of the simulation to run from Simulation_settings_4.0.csv
 # Simulation_settings_4.0.csv must be in the same directory as this script
 # The format of Simulation_settings_4.0.csv is as follows:
-# Simulation,xloc,yloc,zloc,minus_x,plus_x,minus_y,plus_y,minus_z,plus_z,height
+# Simulation,xloc,yloc,zloc,height,minus_x,plus_x,minus_y,plus_y,minus_z,plus_z,z_filled
 # 1,170398,61241,17391,4,0,1,1,0,0,1,0
 # 2,170398,61241,17291,16,0,0,0,0,0,0,0
 # 3,170398,61241,86955,4,0,0,0,0,0,0,1
@@ -17,19 +17,19 @@
 # The height is the height of the cube in microns
 # The xloc, yloc are the coordinates of the center of the cube's x and y faces
 # The zloc is the z coordinate of the center of the cube's bottom face
+# z_filled means that the zloc has been adjusted by 5x to allow insertion of interpolated frames, 0 = false, 1 = true
 
 
 import cloudvolume
 import pandas as pd
 from imageryclient import ImageryClient
-# import matplotlib.pyplot as plt
 import numpy as np
 import fastremap
 import os
 
 
 os.makedirs("../Neuron_transport_data/", exist_ok=True)  
-df_settings = pd.read_csv("Simulation_settings_4.0.csv")
+df_settings = pd.read_csv("Simulation_settings_4.0_smoothed.csv")
 os.chdir("../Neuron_transport_data/")
 
 seg_source = "precomputed://https://storage.googleapis.com/iarpa_microns/minnie/minnie65/seg_m343/"
@@ -39,9 +39,7 @@ seg_cv = cloudvolume.CloudVolume(seg_source, use_https=False)
 ###User input#####
 
 simulation_number = 1
-# z_start_slice = 17391
-# xval = 170398 # x value of center of cube
-# yval = 60741#61241 # y value of center of cube
+
 ####End user input#####
 
 
